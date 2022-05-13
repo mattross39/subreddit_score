@@ -1,0 +1,38 @@
+Pick a subreddit
+Iterate through 100 posts by best
+    Choose posts with question marks in the title
+Scrape all comments on said posts
+    Clean comments
+Instances of (thanks, perfect, great) vs instances of (dumb, stupid, doesn't work)
+ratio of Positive posts / 100
+Output ratio
+
+------------------------------------------------------------
+# Python program to get average of a list
+def Average(list):
+    return sum(list) / len(list)
+  
+# Driver Code
+list = [15, 9, 55, 41, 35, 20, 62, 49]
+average = Average(list)
+  
+# Printing average of the list
+print("Average of the list =", round(average, 2))
+-------------------------------------------------------------
+
+
+def avg(list):
+    return sum(list) / len (list)
+
++thisreddit = reddit.subreddit('soccer')
+
++post_scores = []
+
++for submission in thisreddit(limit = 100)
++   [read all comments]
+    [analyze comments]
+    [output score]
+    post_scores.append(score)
+
+final_score = avg(post_scores)
+print("Helpfuness score = " + final_score)
