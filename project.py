@@ -6,10 +6,9 @@ import pandas as pd
 
 #################################################################
 subreddit_choice = 'cardistry' #input("Which subreddit would you like to analyze? ")
-num_posts = 1
-num_comments = 1
+num_posts = 200
 #################################################################
-post_scores = []
+pos_found = []
 
 # Create an instance of reddit class
 reddit = praw.Reddit(client_id="omwfS9JaoXFyBAprOCftDg",
@@ -19,45 +18,44 @@ reddit = praw.Reddit(client_id="omwfS9JaoXFyBAprOCftDg",
  
 # Create sub-reddit instance
 subreddit = reddit.subreddit(subreddit_choice)
-new_subreddit = subreddit.top(limit=num_posts)
+new_subreddit = subreddit.new(limit=num_posts)
 
 
-all_words = []
-# Importing positive words and negative words from txt files
+# Importing positive words from txt files
 pos_file = open("positive_words.txt")
 pos_words = pos_file.read().split()
-neg_file = open("negative_words.txt")
-neg_words = neg_file.read().split()
-
-
+comment_index = 0
 # Looping through the posts
 for submission in new_subreddit:
-    comment_index = 0
-    sub_pos = {}
-    sub_neg = {}
 
+    
 
-    submission.comments.replace_more(limit=None)
-    for comment in submission.comments.list():
+    #!comment_index = 0
+    submission.comments.replace_more(limit=0)
+    print(len(submission.comments))
+    for comment in submission.comments:
+        #Makes comment lowercase
+        lower_comment = comment.body.lower()
+
         # Cleans punctuation from comment
         clean_comment = comment.body.translate(str.maketrans('', '', string.punctuation))
         
         # Splits comment into a list of words
         split_comment = clean_comment.split()
-        
+                
+        # Adds only positive words
         for word in split_comment:
-            #TODO: 
-
-        #TODO: Convert to lowercase         
-        # Adds words from comment to master count
-        all_words.extend(split_comment)
-        
+            if word in pos_words:
+                pos_found.append(word)
+       
         comment_index += 1
-        if comment_index == num_comments:
-            break
+       #! print(str(comment_index))
+       #! if comment_index == num_comments:
+       #!     break
 
-print(Counter(all_words))
-
+print(comment_index)
+print(Counter(pos_found))
+print("pos words = " + str(len(pos_found)))
 """
 final_score = avg(post_scores)
 print("/r/" + subreddit_choice + " helpfuness score = " + final_score)
