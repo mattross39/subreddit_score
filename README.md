@@ -1,2 +1,7 @@
-<h1>Reddit Helpfulness Score</h1>
-Created by Matthew Ross and Joseph Demateis
+# Subreddit Helpfulness Score
+
+Created by Matt Ross and Joe Demateis
+
+# Requirements: 
+- Python 3.7+
+- praw - To install: ```pip3 install praw```
